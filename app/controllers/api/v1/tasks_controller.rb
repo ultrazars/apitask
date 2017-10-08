@@ -3,7 +3,7 @@
 
 class Api::V1::TasksController < ApplicationController
   def index
-    render json: Task.all
+    render json: Task.all, include: "tags"
   end
 
   def create
@@ -12,7 +12,7 @@ class Api::V1::TasksController < ApplicationController
       task = Task.create!(task_params)
       task.set_tags(tags_params)
     end
-    render json: task
+    render json: task, include: "tags"
   end
 
   def update
